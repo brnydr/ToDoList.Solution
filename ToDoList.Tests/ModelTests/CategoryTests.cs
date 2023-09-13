@@ -6,8 +6,13 @@ using System;
 namespace ToDoList.Tests
 {
   [TestClass]
-  public class CategoryTests
+  public class CategoryTests : IDisposable
   {
+
+    public void Dispose()
+    {
+      Category.ClearAll();
+    }
     [TestMethod]
     public void CategoryConstructor_CreatesInstanceOfCategory_Category()
     {
@@ -27,6 +32,15 @@ namespace ToDoList.Tests
 
       //Assert
       Assert.AreEqual(name, result);
+    }
+
+    [TestMethod]
+    public void GetId_ReturnsId_Int()
+    {
+      string name = "Test Category";
+      Category newCategory = new Category(name);
+      int result = newCategory.Id;
+      Assert.AreEqual(1, result);
     }
 
   }
